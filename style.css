@@ -11,11 +11,11 @@ html {
 
 /* CSS Variables */
 :root {
-  --primary-color: #0077b6;   /* Button & accent color */
-  --accent-color: #023e8a;    /* Deeper accent color */
-  --background-color: #ffffff;/* White page background */
-  --text-color: #333333;      /* Neutral text color */
-
+  --primary-color: #0077b6;       /* Button & accent color */
+  --accent-color: #023e8a;        /* Deeper accent color */
+  --background-color: #ffffff;    /* White page background */
+  --text-color: #333333;          /* Neutral text color */
+  
   --secondary-color: #90e0ef;
   --header-bg: #f5f5f5;
   --section-bg: #fefefe;
@@ -31,6 +31,7 @@ body {
   line-height: 1.6;
 }
 
+/* Main Container */
 #app {
   max-width: 1200px;
   margin: 0 auto;
@@ -75,7 +76,57 @@ body {
   color: var(--btn-hover);
 }
 
-/* Hero/ Header */
+/* Light/Dark Mode Toggle Button */
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-left: 20px;
+  color: var(--text-color);
+  transition: transform 0.3s;
+  display: flex;
+  align-items: center;
+}
+.theme-toggle:hover {
+  transform: rotate(20deg);
+}
+.theme-toggle i {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+/* In dark mode, hide the sun icon and show the moon icon */
+body.dark-mode .bi-sun {
+  display: none;
+}
+body.dark-mode .bi-moon {
+  display: inline;
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background: var(--header-bg);
+    width: 100%;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease;
+  }
+  .nav-links.active {
+    max-height: 300px;
+  }
+  .nav-links li {
+    margin: 15px 0;
+    text-align: center;
+  }
+}
+
+/* Hero/Header Section */
 header {
   text-align: center;
   padding: 120px 20px 60px;
@@ -113,7 +164,7 @@ section#about p {
   margin-top: 10px;
 }
 
-/* Features Section */
+/* Features Section (if used) */
 section#features {
   background: var(--section-bg);
   padding: 40px 20px;
@@ -155,7 +206,7 @@ section#features h2 {
   font-size: 1rem;
 }
 
-/* Success Stories Section */
+/* Success Stories Section (if used) */
 section#success {
   background: var(--section-bg);
   padding: 40px 20px;
@@ -309,7 +360,36 @@ footer {
   background: var(--header-bg);
 }
 
-/* Fade Up Animations (AOS) */
+/* Vertical Social Icons */
+.vertical-social {
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  z-index: 2000;
+}
+.vertical-social a img.social-icon {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s, opacity 0.3s;
+  opacity: 0.8;
+}
+.vertical-social a:hover img.social-icon {
+  transform: scale(1.1);
+  opacity: 1;
+}
+.vertical-social .vertical-line {
+  width: 2px;
+  height: 80px;
+  background-color: var(--accent-color);
+  margin-top: 10px;
+}
+
+/* AOS Fade Up Animation */
 [data-aos="fade-up"] {
   opacity: 0;
   transform: translateY(20px);
@@ -327,8 +407,26 @@ footer {
   header h1 {
     font-size: 2rem;
   }
-  
   .features-list {
     flex-direction: column;
+  }
+  .project-image {
+    max-width: 100%;
+    max-height: 250px;
+  }
+  .nav-links {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .cta-buttons {
+    flex-direction: column;
+  }
+  .cta-buttons .btn {
+    margin: 5px 0;
+    width: 100%;
+    max-width: 300px;
+  }
+  .contact-form {
+    padding: 0 20px;
   }
 }
