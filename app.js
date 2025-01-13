@@ -1,51 +1,36 @@
+// app.js
+
 // Grab the main container
 const app = document.getElementById('app');
 
-// 1) Navbar (optional for JS build; you can also manage this via HTML)
-const navbar = document.createElement('nav');
-navbar.className = 'navbar';
-navbar.innerHTML = `
-  <div class="nav-container">
-    <div class="nav-logo">Sweep & Sleep</div>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#features">Features</a></li>
-      <li><a href="#success">Success</a></li>
-      <li><a href="#founder">Founder</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
-`;
-document.body.prepend(navbar);
-
-// 2) Hero Section
-const heroHeader = document.createElement('header');
-heroHeader.setAttribute('data-aos', 'fade-up');
-heroHeader.innerHTML = `
+// 1) Hero Section (Content over the video background)
+const heroSection = document.createElement('section');
+heroSection.className = 'hero-content';
+heroSection.setAttribute('data-aos', 'fade-up');
+heroSection.innerHTML = `
   <h1>Transform Your Rental Experience</h1>
   <p>
     At Sweep & Sleep, we’re redefining shared living by empowering landlords with complete oversight 
-    and providing tenants a clean, private, and respectful environment. Join us and discover a fair, 
-    transparent solution where everyone wins.
+    and providing tenants a clean, private, and respectful environment.
   </p>
+  <div id="typed-text"></div>
 `;
-app.appendChild(heroHeader);
+app.appendChild(heroSection);
 
-// 3) About Section
+// 2) About Section
 const aboutSection = document.createElement('section');
 aboutSection.id = 'about';
 aboutSection.setAttribute('data-aos', 'fade-up');
 aboutSection.innerHTML = `
   <h2>About Sweep & Sleep</h2>
   <p>
-    We believe that everyone deserves a clean and quiet living space. Our platform 
-    connects landlords with responsible roommates and offers an all-inclusive rental management 
-    system to ensure fair and transparent experiences for everyone involved.
+    We believe that everyone deserves a clean and quiet living space. Our platform connects landlords with responsible tenants,
+    offering an all-inclusive rental management system for fair, transparent, and efficient living.
   </p>
 `;
 app.appendChild(aboutSection);
 
-// 4) Features Section
+// 3) Features Section with Modal Trigger
 const featuresSection = document.createElement('section');
 featuresSection.id = 'features';
 featuresSection.setAttribute('data-aos', 'fade-up');
@@ -55,66 +40,92 @@ featuresSection.innerHTML = `
     <div class="feature-card">
       <h3>All-Inclusive Rental Management</h3>
       <p>
-        Manage rental agreements, tenant records, and property info in one place. Our flexible monthly contracts give both parties the freedom to stay or move on, ensuring minimal hassle and maximum control.
+        Manage all aspects of your rental properties—contracts, tenant records, maintenance requests—in one platform.
       </p>
+      <button class="btn modal-trigger" data-modal="feature1-modal">Learn More</button>
     </div>
-    <div class="feature-card">
-      <h3>Neatkeeper & Weekly Video Updates</h3>
-      <p>
-        Each week, a Neatkeeper visits your unit, sends a video update, and scores roommates on cleanliness. Stay informed and keep your property pristine.
-      </p>
-    </div>
-    <div class="feature-card">
-      <h3>Private Rooms & Fair Chore System</h3>
-      <p>
-        Tenants enjoy private, locked rooms in a shared living space. Our platform tracks chores and ensures accountability.
-      </p>
-    </div>
-    <div class="feature-card">
-      <h3>Apartment Renter (Local Leadership)</h3>
-      <p>
-        Assign a lead roommate to handle day-to-day issues and offer guidance. They receive a rent discount in return.
-      </p>
-    </div>
-    <div class="feature-card">
-      <h3>Centralized Information</h3>
-      <p>
-        Everything from Wi-Fi passwords to property details is stored in one place, streamlining communication.
-      </p>
-    </div>
-    <div class="feature-card">
-      <h3>Flexible & Free</h3>
-      <p>
-        Our platform is currently free—experience the benefits of an efficient, transparent rental system at no cost.
-      </p>
-    </div>
+    <!-- You can add more feature cards here -->
   </div>
 `;
 app.appendChild(featuresSection);
 
-// 5) Success Stories Section
-const successSection = document.createElement('section');
-successSection.id = 'success';
-successSection.setAttribute('data-aos', 'fade-up');
-successSection.innerHTML = `
+// 4) Create Modal Pop-up for Feature Details
+const createModal = (modalId, contentHTML) => {
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.id = modalId;
+  modal.innerHTML = `
+    <div class="modal-content" data-aos="fade-up">
+      <button class="modal-close" aria-label="Close Modal">&times;</button>
+      ${contentHTML}
+    </div>
+  `;
+  document.body.appendChild(modal);
+};
+createModal('feature1-modal', `
+  <h3>All-Inclusive Rental Management</h3>
+  <p>
+    Our platform enables seamless management of rental agreements, tenant records, and property details in a single system.
+  </p>
+  <img src="images/background.png" alt="Feature Image">
+`);
+
+// Open modals
+document.querySelectorAll('.modal-trigger').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const modalId = btn.getAttribute('data-modal');
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.add('active');
+    }
+  });
+});
+// Close modals
+document.querySelectorAll('.modal-close').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.closest('.modal').classList.remove('active');
+  });
+});
+
+// 5) Testimonial Slider Section using Swiper
+const testimonialSection = document.createElement('section');
+testimonialSection.id = 'testimonials';
+testimonialSection.setAttribute('data-aos', 'fade-up');
+testimonialSection.innerHTML = `
   <h2>Success Stories</h2>
-  <div class="testimonial">
-    <h4>Shazil, Landlord in Calgary</h4>
-    <p>
-      “I purchased a property in Edmonton through Todd’s guidance and listed it on Sweep & Sleep. 
-      Even though I’m hours away, the system keeps me fully informed. Weekly updates and streamlined 
-      processes have made tenant turnover smooth and stress-free.”
-    </p>
-  </div>
-  <div class="testimonial">
-    <h4>Seth, Newcomer from Ukraine</h4>
-    <p>
-      “Since arriving in Canada, I’ve used Sweep & Sleep to find a clean, private room. The platform 
-      even connects me with local work opportunities, making it a win-win situation.”
-    </p>
+  <div class="swiper-container testimonial-slider">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <h4>Shazil, Landlord in Calgary</h4>
+        <p>
+          “Sweep & Sleep keeps me informed with weekly updates and stress-free tenant management.”
+        </p>
+      </div>
+      <div class="swiper-slide">
+        <h4>Seth, Roommate</h4>
+        <p>
+          “I found a clean, private room and even connected with local work opportunities.”
+        </p>
+      </div>
+    </div>
+    <!-- Navigation buttons (optional) -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
   </div>
 `;
-app.appendChild(successSection);
+app.appendChild(testimonialSection);
+
+// Initialize Swiper after content loads
+setTimeout(() => {
+  const swiper = new Swiper('.swiper-container', {
+    autoplay: { delay: 5000 },
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+}, 500);
 
 // 6) Founder Section
 const founderSection = document.createElement('section');
@@ -123,9 +134,10 @@ founderSection.setAttribute('data-aos', 'fade-up');
 founderSection.innerHTML = `
   <h2>Meet Todd – Our Founder</h2>
   <p>
-    With over <strong>30 years</strong> of experience as a landlord, Todd Ogryzlo has witnessed and solved many rental challenges.
-    His vision for a fair and transparent rental experience led to the creation of Sweep & Sleep.
+    With over 30 years of experience as a landlord, Todd Ogryzlo revolutionized rental management 
+    to create a fair, transparent system that works for everyone.
   </p>
+  <img src="images/Todd.jpg" alt="Todd" style="max-width:200px; border-radius:8px;">
 `;
 app.appendChild(founderSection);
 
@@ -135,7 +147,7 @@ ctaSection.id = 'cta';
 ctaSection.innerHTML = `
   <h2>Ready to Experience Peace of Mind?</h2>
   <p>
-    Join Sweep & Sleep today for a free, no-obligation trial and discover the benefits of an efficient, transparent system.
+    Join Sweep & Sleep today for a free trial and discover the benefits of an efficient, transparent rental system.
   </p>
   <div class="cta-buttons">
     <a href="#contact" class="btn">Sign Up for Free</a>
@@ -149,17 +161,14 @@ contactSection.id = 'contact';
 contactSection.setAttribute('data-aos', 'fade-up');
 contactSection.innerHTML = `
   <h2>Contact Us</h2>
-  <p>Questions? Fill out the form below and we'll get in touch.</p>
+  <p>Questions? Fill out the form below and we’ll get in touch.</p>
   <form action="https://formspree.io/f/your-form-id" method="POST" class="contact-form">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required />
-
     <label for="email">Email:</label>
     <input type="email" id="email" name="_replyto" required />
-
     <label for="message">Message:</label>
     <textarea id="message" name="message" rows="5" required></textarea>
-
     <button type="submit" class="btn">Send Message</button>
   </form>
 `;
@@ -171,4 +180,5 @@ footer.innerHTML = `
   <p>&copy; ${new Date().getFullYear()} Sweep & Sleep. All Rights Reserved.</p>
 `;
 app.appendChild(footer);
+
 
