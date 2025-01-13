@@ -11,16 +11,14 @@ html {
 
 /* CSS Variables */
 :root {
-  /* Basic Theme Colors */
   --primary-color: #0077b6;   /* Button & accent color */
   --accent-color: #023e8a;    /* Deeper accent color */
   --background-color: #ffffff;/* White page background */
   --text-color: #333333;      /* Neutral text color */
-  
-  /* Secondary / Lighter variants if needed */
-  --secondary-color: #90e0ef; 
-  --header-bg: #f5f5f5;       /* Soft gray for header background */
-  --section-bg: #fefefe;      /* Another soft white for sections */
+
+  --secondary-color: #90e0ef;
+  --header-bg: #f5f5f5;
+  --section-bg: #fefefe;
   --btn-bg: var(--primary-color);
   --btn-hover: var(--accent-color);
 }
@@ -33,17 +31,54 @@ body {
   line-height: 1.6;
 }
 
-/* Container (Optional) */
 #app {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-/* HEADER / HERO SECTION */
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: var(--header-bg);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
+  padding: 10px 20px;
+}
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+.nav-links li a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+.nav-links li a:hover {
+  color: var(--btn-hover);
+}
+
+/* Hero/ Header */
 header {
   text-align: center;
-  padding: 120px 20px 60px; /* Enough top space to look balanced */
+  padding: 120px 20px 60px;
   background: var(--header-bg);
   color: var(--text-color);
 }
@@ -58,7 +93,7 @@ header p {
   margin: 0 auto;
 }
 
-/* ABOUT SECTION */
+/* About Section */
 section#about {
   background: var(--section-bg);
   padding: 40px 20px;
@@ -78,14 +113,14 @@ section#about p {
   margin-top: 10px;
 }
 
-/* TEAM SECTION */
-section#team {
+/* Features Section */
+section#features {
   background: var(--section-bg);
   padding: 40px 20px;
   margin-top: 40px;
   border-radius: 8px;
 }
-section#team h2 {
+section#features h2 {
   font-size: 2rem;
   margin-bottom: 20px;
   color: var(--accent-color);
@@ -93,47 +128,126 @@ section#team h2 {
   display: inline-block;
   padding-bottom: 5px;
 }
-.team-container {
+.features-list {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
-  justify-content: center;
+  margin-top: 20px;
 }
-.team-member {
+.feature-card {
+  flex: 1 1 300px;
+  max-width: 400px;
   background: #f7f7f7;
   border-radius: 8px;
   padding: 20px;
-  max-width: 300px;
-  flex: 1 1 300px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  text-align: center;
   transition: transform 0.3s;
 }
-.team-member:hover {
+.feature-card:hover {
   transform: translateY(-5px);
 }
-.team-member img {
-  width: 100px;  /* Adjust as desired */
-  height: 100px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 15px;
-}
-.team-member h3 {
-  font-size: 1.4rem;
-  color: var(--accent-color);
-  margin-bottom: 5px;
-}
-.team-member h4 {
-  font-size: 1.1rem;
-  color: var(--text-color);
+.feature-card h3 {
+  font-size: 1.3rem;
   margin-bottom: 10px;
+  color: var(--btn-bg);
 }
-.team-member p {
+.feature-card p {
   font-size: 1rem;
 }
 
-/* CONTACT SECTION */
+/* Success Stories Section */
+section#success {
+  background: var(--section-bg);
+  padding: 40px 20px;
+  margin-top: 40px;
+  border-radius: 8px;
+}
+section#success h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+  display: inline-block;
+  padding-bottom: 5px;
+}
+.testimonial {
+  background: #f7f7f7;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.testimonial h4 {
+  color: var(--btn-bg);
+  margin-bottom: 5px;
+}
+.testimonial p {
+  font-size: 1rem;
+}
+
+/* Founder Section */
+section#founder {
+  background: var(--section-bg);
+  padding: 40px 20px;
+  margin-top: 40px;
+  border-radius: 8px;
+}
+section#founder h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+  display: inline-block;
+  padding-bottom: 5px;
+}
+section#founder p {
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+/* CTA Section */
+section#cta {
+  text-align: center;
+  padding: 40px 20px;
+  background: var(--accent-color);
+  margin: 40px 0;
+  border-radius: 8px;
+}
+section#cta h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+  border-bottom: 2px solid #ffffff;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+section#cta p {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.btn {
+  display: inline-block;
+  background-color: var(--btn-bg);
+  color: #ffffff;
+  padding: 10px 20px;
+  margin: 10px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+.btn:hover {
+  background-color: var(--btn-hover);
+  box-shadow: 0 0 10px #cccccc, 0 0 20px #cccccc;
+}
+
+/* Contact Section */
 section#contact {
   background: var(--section-bg);
   padding: 40px 20px;
@@ -168,8 +282,8 @@ section#contact p {
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  color: var(--text-color);
   background: #fafafa;
+  color: var(--text-color);
 }
 .contact-form button {
   align-self: flex-start;
@@ -185,17 +299,7 @@ section#contact p {
   background-color: var(--btn-hover);
 }
 
-/* Simple fade effect for sections */
-[data-aos="fade-up"] {
-  opacity: 0;
-  transform: translateY(20px);
-}
-[data-aos="fade-up"].aos-animate {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* FOOTER */
+/* Footer */
 footer {
   text-align: center;
   padding: 20px;
@@ -203,6 +307,16 @@ footer {
   font-size: 0.9rem;
   margin-top: 40px;
   background: var(--header-bg);
+}
+
+/* Fade Up Animations (AOS) */
+[data-aos="fade-up"] {
+  opacity: 0;
+  transform: translateY(20px);
+}
+[data-aos="fade-up"].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Responsive */
@@ -213,12 +327,8 @@ footer {
   header h1 {
     font-size: 2rem;
   }
-  .team-container {
+  
+  .features-list {
     flex-direction: column;
-    align-items: center;
-  }
-  .team-member {
-    max-width: 90%;
   }
 }
-
